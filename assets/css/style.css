@@ -1,0 +1,61 @@
+/*========================  ADD FONTS   =============================*/
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+
+:root{
+    --bg-color: rgb(95, 94, 93);
+    --title-color: rgb(245, 244, 244);
+    --font-text: "Ubuntu", sans-serif;
+}
+
+body{
+    background-color: var(--bg-color);
+    font-family: var(--font-text);
+}
+
+h1, h3{
+    color: var(--title-color);
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+.main{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/*===============    Main Card To do list    ================== */
+.container__card{
+    display: flex;
+    margin-top: 6rem;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 40rem;
+    height: 50rem;
+}
+
+.contents__card{
+    width: 100%;
+}
+
+.title__card{
+    line-height: .5rem;
+}
+
+.title__card h1{font-size: 4rem;}
+
+.title__card h3{
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-left: 1rem;
+}
+
+hr{
+    width: 100%;
+}
