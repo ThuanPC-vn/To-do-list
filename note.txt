@@ -1,3 +1,7 @@
 Difficulties encountered during the coding process:
 
-1. I don't know how to code JS so that when I enter data into the input box and when I click add item, that data will be added to the list of tasks.
+1. Still not familiar with GIT
+
+2. I still can't remember all funtions of the properties in CSS.
+
+3. I don't know how to code JS so that when I enter data into the input box and when I click add item, that data will be added to the list of tasks.

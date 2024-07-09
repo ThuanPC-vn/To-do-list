@@ -121,6 +121,7 @@ h1, h3{
     position: absolute;
     top: 0%;
     right: 2.3rem;
+    cursor: pointer;
 }
 
 
