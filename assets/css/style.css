@@ -30,6 +30,8 @@ h1, h3{
 
 
 /*===============    Main Card To do list    ================== */
+
+/* =====Title list===== */
 .container__card{
     display: flex;
     margin-top: 6rem;
@@ -42,6 +44,10 @@ h1, h3{
 
 .contents__card{
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .title__card{
@@ -57,20 +63,32 @@ h1, h3{
 }
 
 
-
+/* =====List works===== */
+.list__work__bg{
+    width: 100%;
+    height: 45vh;
+    position: relative;
+    background-color: rgba(250, 235, 215, 0.309);
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
 
 .list__work{
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    width: 90%;
+    top: 0rem;
 }
 
 .work__bg{
-    /* background-color: rgb(244, 202, 202); */
-    border: 1px solid red;
+    border-radius: 20px;
     width: 100%;
     height: 2rem;
     margin-top: 1rem;
+    background-color: rgb(255, 170, 0);
 }
 
 .works__content{
@@ -96,10 +114,26 @@ h1, h3{
     top: 0%;
     right: 1rem;
     cursor: pointer;
+    color: red;
 }
 
-.action__buttons input{
+.checkbox__work{
     position: absolute;
     top: 0%;
     right: 2.3rem;
+}
+
+
+
+/* =====Buton add work===== */
+.add__work__container{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border: 1px solid red;
+}
+
+.add__work__contents{
+    position: absolute;
+    bottom: 0px;
 }
