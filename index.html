@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <!--==================  JavaScripts =======================-->
-    <link rel="js" href="./assets/js/main.js">
+    <script src="./assets/js/main.js"></script>
 </head>
 <body>
 
@@ -33,7 +33,7 @@
                     <hr>
                 </div>
 
-                <div class="list__work__bg">
+                <div class="list__work__bg" style="overflow: none">
                     <div class="list__work">
 
                         <div class="work__bg">
@@ -77,18 +77,25 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                     </div>
                 </div>
 
                 <div class="add__work__container">
                     <div class="add__work__contents">
-                        <h3>Add to the todo list</h3>
-                        <div class="add__actions">
-                            <input type="text">
+
+                        <div class="input__work">
+                            <h3>Add to the todo list</h3>
+                            <input class="input__namework" type="text">
                         </div>
+                        
+                        <div class="add__actions">
+                            <button class="add__work">ADD ITEM</button>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
 
         </section>

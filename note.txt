@@ -1,0 +1,3 @@
+Difficulties encountered during the coding process:
+
+1. I don't know how to code JS so that when I enter data into the input box and when I click add item, that data will be added to the list of tasks.
