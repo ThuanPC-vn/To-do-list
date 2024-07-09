@@ -65,14 +65,41 @@ h1, h3{
     align-items: center;
 }
 
-.work1, .work2{
+.work__bg{
+    /* background-color: rgb(244, 202, 202); */
     border: 1px solid red;
     width: 100%;
     height: 2rem;
-    margin-top: .5rem;
+    margin-top: 1rem;
+}
+
+.works__content{
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .name__works{
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+}
+
+.action__buttons{
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+.action__buttons i{
+    position: absolute;
+    top: 0%;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.action__buttons input{
+    position: absolute;
+    top: 0%;
+    right: 2.3rem;
 }
