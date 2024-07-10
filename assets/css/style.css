@@ -194,7 +194,12 @@ h1, h3{
     cursor: pointer;
     margin-top: 2.7rem;
 
-    font-weight: 500;
+    font-weight: 700;
     font-size: 20px;
     font-family: var(--font-text);
+    transition: .5s;
+}
+
+.add__work:hover{
+    background-color: rgb(255, 145, 0);
 }
