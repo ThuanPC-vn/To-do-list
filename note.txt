@@ -4,6 +4,7 @@ Difficulties encountered during the coding process:
 
 2. I still can't remember all funtions of the properties in CSS.
 
-3. I don't know how to code JS so that when I enter data into the input box and when I click add item, that data will be added to the list of tasks.
+3. I don't know how to code JS so that when I enter data into the input box
+and when I click add item, that data will be added to the list of tasks.
 
 The return command returns a long piece of html code in js

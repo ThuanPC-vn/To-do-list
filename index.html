@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <!--==================  JavaScripts =======================-->
-    <script src="./assets/js/main.js"></script>
+    <script defer src="./assets/js/main.js"></script>
 </head>
 <body>
 
@@ -33,47 +33,17 @@
                     <hr>
                 </div>
 
-                <div class="list__work__bg" style="overflow: none">
-                    <div class="list__work">
+                <div class="list__work__bg">
+                    <div class="list__work" id="list-tasks">
 
-                        <div class="work__bg">
-                            <div class="works__content">
+                        <div class="work__bg" id="bg-task">
+                            <div class="works__content" id="contens-task">
 
-                                <label class="name__works">
-                                <del> Learn VueJS </del>
-                                </label>
+                                <label class="name__works">Learn VueJS</label>
                         
                                 <div class="action__buttons">
-                                    <input class="checkbox__work" type="checkbox">
-                                    <i class='bx bxs-trash'></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="work__bg">
-                            <div class="works__content">
-
-                                <label class="name__works">
-                                 Learn something else. 
-                                </label>
-                        
-                                <div class="action__buttons">
-                                    <input class="checkbox__work" type="checkbox">
-                                    <i class='bx bxs-trash'></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="work__bg">
-                            <div class="works__content">
-
-                                <label class="name__works">
-                                 Go to the GYM. 
-                                </label>
-                        
-                                <div class="action__buttons">
-                                    <input class="checkbox__work" type="checkbox">
-                                    <i class='bx bxs-trash'></i>
+                                    <input class="checkbox__work" type="checkbox" id="compeleteCheck">
+                                    <i class='bx bxs-trash' id="deleTask"></i>
                                 </div>
                             </div>
                         </div>
@@ -86,11 +56,11 @@
 
                         <div class="input__work">
                             <h3>Add to the todo list</h3>
-                            <input class="input__namework" type="text">
+                            <input class="input__namework" type="text" id="input-field" placeholder="Write a task you want to do.">
                         </div>
                         
                         <div class="add__actions">
-                            <button class="add__work">ADD ITEM</button>
+                            <button class="add__work" id="AddtaskButton">ADD ITEM</button>
                         </div>
 
                     </div>
