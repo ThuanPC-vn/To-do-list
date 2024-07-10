@@ -3,10 +3,6 @@ let addTodo = document.getElementById('AddtaskButton');
 let listTasks = document.getElementById('list-tasks');
 let inputField = document.getElementById('input-field');
 
-const bgTasks = document.querySelectorAll('label');
-
-console.log(bgTasks.length);
-
 
 function TasksFun(){
 
