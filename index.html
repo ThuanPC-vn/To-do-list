@@ -22,21 +22,21 @@
     <main class="main">
 
         <!--============    CARD TO DO LIST Card    ==================-->
-        <section class="container__card">
+        <section class="todo__card">
 
             <!--============    CARD TO DO LIST Content    ==================-->
             <div class="contents__card">
 
-                <div class="title__card">
+                <header class="header__card">
                     <h1>To do list</h1>
                     <h3>Get things done, one item at a time.</h3>
                     <hr>
-                </div>
+                </header>
 
-                <div class="list__work__bg">
+                <div class="list__work__container">
                     <div class="list__work" id="list-tasks">
 
-                        <!-- <div class="work__bg" id="bg-task">
+                        <div class="work__bg" id="bg-task">
                             <div class="works__content" id="contens-task">
 
                                 <label class="name__works">Learn VueJS</label>
@@ -46,12 +46,24 @@
                                     <i class='bx bxs-trash' id="deleTask"></i>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+
+                        <div class="work__bg" id="bg-task">
+                            <div class="works__content" id="contens-task">
+
+                                <label class="name__works">Learn ReactJS</label>
+                        
+                                <div class="action__buttons">
+                                    <input class="checkbox__work" type="checkbox" id="compeleteCheck">
+                                    <i class='bx bxs-trash' id="deleTask"></i>
+                                </div>
+                            </div>
+                        </div>
                         
                     </div>
                 </div>
 
-                <div class="add__work__container">
+                <footer class="add__work__footer">
                     <div class="add__work__contents">
 
                         <div class="input__work">
@@ -64,7 +76,7 @@
                         </div>
 
                     </div>
-                </div>
+                </footer>
 
             </div>
 
