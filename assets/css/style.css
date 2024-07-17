@@ -122,46 +122,45 @@ h1, h3{
     font-size: 23px;
     position: absolute;
     left: 3rem;
+    transition: .5s;
 }
 
 /* ========================================================================== */
 
 .action__task{
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-between; */
+    flex-direction: row;
+    gap: 0rem;
     position: absolute;
         right: 3rem;
-    width: 80px;
+    width: 65px;
     height: 35px;
 }
 
 .action__task i{
     position: absolute;
-    top: -2.1px;
-    right: 0rem;
+    top: 0px;
     cursor: pointer;
     color: white;
-    size: 30px;
-    background-color: transparent;
 }
 
-input.checkbox__task{
-    position: absolute;
-    top: 0%;
-    right: 3rem;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
+.bx__Checked{
+    left: 5px;
+    margin-top: 6px;
+    transition: .5s;
 }
 
-/* .action__buttons input[type="checkbox"]{
-    opacity: 0.00000001;
+.bx__noCheck{
+    left: 0px;
+    transition: .5s;
 }
 
-.action__buttons input[type="checkbox"]:focus{
-    outline: 0;
-} */
+.bx__trash{
+    margin-top: 6.5px;
+    top: 0px;
+    right: 0px;
+}
 
 
 
