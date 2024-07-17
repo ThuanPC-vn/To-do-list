@@ -100,7 +100,6 @@ h1, h3{
     width: 100%;
     height: 43vh;
     top: 0rem;
-    border: 1px solid red;
 }
 
 /* ========================================================================== */
@@ -127,7 +126,7 @@ h1, h3{
 
 /* ========================================================================== */
 
-.action__buttons{
+.action__task{
     display: flex;
     justify-content: space-evenly;
     position: absolute;
@@ -136,7 +135,7 @@ h1, h3{
     height: 35px;
 }
 
-.action__buttons i{
+.action__task i{
     position: absolute;
     top: -2.1px;
     right: 0rem;
