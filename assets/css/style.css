@@ -155,13 +155,13 @@ input.checkbox__task{
     background-color: transparent;
 }
 
-.action__buttons input[type="checkbox"]{
-    /* opacity: 0.00000001; */
+/* .action__buttons input[type="checkbox"]{
+    opacity: 0.00000001;
 }
 
 .action__buttons input[type="checkbox"]:focus{
     outline: 0;
-}
+} */
 
 
 
