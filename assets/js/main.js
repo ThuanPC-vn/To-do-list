@@ -86,8 +86,6 @@ function saveTask(){
         idTask++;
     })
       
-    
-    
     localStorage.setItem('taskList', JSON.stringify(tasks));
     
     console.log(tasks);
