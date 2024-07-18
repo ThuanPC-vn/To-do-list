@@ -25,7 +25,19 @@ function addTask(){
 }
 
 /*============== WHEN CLICK ADD ITEM IS CALL FUNTION addTask ================= */
-addTodo.addEventListener('click',addTask)
+addTodo.addEventListener('click',addTask);
+
+/*============== WHEN PRESS 'Enter' IS CALL FUNTION addTask ================= */
+inputField.addEventListener('keypress',(e)=>{
+    if (inputField.value && e.key === 'Enter'){
+        addTask();
+    }
+    else{
+        if (!inputField.value && e.key == 'Enter'){
+            alert("Plesea write a task you want to do.");
+        }
+    }
+});
 
 /*============== FUNTION CREAT ELEMENT & LOGIC ACTION BUTTON ================= */
 function createElementTask(task){
@@ -115,5 +127,6 @@ function loadTask(){
         createElementTask(item.nameTask);
     });
 }
+
 
 
