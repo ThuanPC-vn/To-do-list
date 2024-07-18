@@ -3,11 +3,15 @@ let addTodo = document.getElementById('addTaskButton');
 let listTasks = document.getElementById('list-tasks');
 let inputField = document.getElementById('input-field');
 
+
+//*============== CALL FUNTION RENDER DATA TASK FROM LOCALSTORAGE ================= */
 loadTask();
 
+
+/*============== FUNTION addTask WITH CONDITIONAL ================= */
 function addTask(){
 
-    const task = inputField.value;
+    const task = inputField.value.trim();
     if (task){
         createElementTask(task);
         inputField.value = '';
@@ -20,10 +24,13 @@ function addTask(){
     
 }
 
+/*============== WHEN CLICK ADD ITEM IS CALL FUNTION addTask ================= */
 addTodo.addEventListener('click',addTask)
 
-
+/*============== FUNTION CREAT ELEMENT & LOGIC ACTION BUTTON ================= */
 function createElementTask(task){
+
+    /*====================== CREAT ELEMENT FOR TASK========================= */
     const liTask = document.createElement('li');
     liTask.className = "task__content";
     listTasks.appendChild(liTask);
@@ -73,6 +80,8 @@ function createElementTask(task){
     })
 }
 
+
+/*============= SAVE TASK INTO OBJECT & PUSH THE ARRAY INSIDE localStorage =================== */
 function saveTask(){
 
     
@@ -97,6 +106,8 @@ function saveTask(){
     console.log(tasks);
 }
 
+
+/*========== RENDER TASKS FROM LISH TASK SAVED INTO ARRAY INSIDE localStorage ========================= */
 function loadTask(){
     const tasks = JSON.parse(localStorage.getItem('taskList')) || [];
     
@@ -104,3 +115,5 @@ function loadTask(){
         createElementTask(item.nameTask);
     });
 }
+
+

@@ -222,7 +222,7 @@ h1, h3{
     height: 100%;
 } */
 
-.add__work{
+.add__work:has(i){
     outline: none;
     border: none;
     background-color: transparent;  
@@ -237,6 +237,11 @@ h1, h3{
     font-size: 20px;
     font-family: var(--font-text);
     transition: .5s;
+}
+
+.add__work i{
+    position: relative;
+    align-items: center;
 }
 
 .add__work:hover{
