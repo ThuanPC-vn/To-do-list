@@ -46,6 +46,7 @@ function createElementTask(task){
     iconDelete.classList.add('bx', 'bxs-trash', 'bx-sm', 'bx__trash');
     divAction.appendChild(iconDelete);
 
+    /*====================== CHECKBOX ACTION ========================= */
     iconCheckbox.addEventListener('click',() => {
         if (iconCheckbox.id == "iNoCheck"){
             pTask.style.textDecoration = "line-through";
@@ -65,6 +66,11 @@ function createElementTask(task){
         }
     })
 
+    /*====================== CHECKBOX ACTION ========================= */
+    iconDelete.addEventListener('click',() => {
+        listTasks.removeChild(liTask);
+        saveTask();
+    })
 }
 
 function saveTask(){
@@ -92,12 +98,9 @@ function saveTask(){
 }
 
 function loadTask(){
-
     const tasks = JSON.parse(localStorage.getItem('taskList')) || [];
     
     tasks.forEach(function(item){
         createElementTask(item.nameTask);
     });
-
-    console.log("THUANPC");
 }
