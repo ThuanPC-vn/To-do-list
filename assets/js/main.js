@@ -16,6 +16,8 @@ function addTask(){
     else{
         alert("Plesea write a task you want to do.");
     }
+
+    
 }
 
 addTodo.addEventListener('click',addTask)
@@ -62,27 +64,28 @@ function createElementTask(task){
             iconCheckbox.setAttribute("id", "iNoCheck");
         }
     })
+
 }
 
 function saveTask(){
 
-    let taskContent = document.getElementById('taskContent');
+    
     let tasks = [];
     let idTask = 0;
-
-    taskContent.querySelectorAll('p.name__task').forEach(function(item){
-         
-        let nameTaskValue = item.textContent.trim();
-        var ojectTask = new Object();
-
-        ojectTask.id = idTask;
-        ojectTask.nameTask = nameTaskValue;
-
-        tasks.push(ojectTask)//<= push a Object right here
-
-        idTask++;
-    });
     
+    // funtion add value in a Object
+    function ojectTask(idTask, nameTask){
+        this.idTask = idTask,
+        this.nameTask = nameTask
+    }
+
+    
+    listTasks.querySelectorAll('li.task__content').forEach(function(item) {
+        //push a new Object right here 
+        tasks.push(new ojectTask(idTask, item.textContent))
+        idTask++;
+    })
+      
     localStorage.setItem('taskList', JSON.stringify(tasks));
     
     console.log(tasks);
