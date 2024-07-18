@@ -3,7 +3,7 @@ let addTodo = document.getElementById('addTaskButton');
 let listTasks = document.getElementById('list-tasks');
 let inputField = document.getElementById('input-field');
 
-
+loadTask();
 
 function addTask(){
 
@@ -74,7 +74,7 @@ function saveTask(){
     let idTask = 0;
     
     // funtion add value in a Object
-    function ojectTask(idTask, nameTask){
+    function objectTask(idTask, nameTask){
         this.idTask = idTask,
         this.nameTask = nameTask
     }
@@ -82,11 +82,22 @@ function saveTask(){
     
     listTasks.querySelectorAll('li.task__content').forEach(function(item) {
         //push a new Object right here 
-        tasks.push(new ojectTask(idTask, item.textContent))
+        tasks.push(new objectTask(idTask, item.textContent))
         idTask++;
     })
       
     localStorage.setItem('taskList', JSON.stringify(tasks));
     
     console.log(tasks);
+}
+
+function loadTask(){
+
+    const tasks = JSON.parse(localStorage.getItem('taskList')) || [];
+    
+    tasks.forEach(function(item){
+        createElementTask(item.nameTask);
+    });
+
+    console.log("THUANPC");
 }
