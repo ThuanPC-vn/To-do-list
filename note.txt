@@ -8,3 +8,14 @@ Difficulties encountered during the coding process:
 and when I click add item, that data will be added to the list of tasks.
 
 The return command returns a long piece of html code in js
+
+let maxID = 0
+        todo.forEach((item)=>{
+            console.log(item.idTask);
+            if(item.idTask > maxID){
+                maxID = item.idTask; 
+            }
+        })
+        console.log(maxID);
+        idTest = maxID;
+        return idTest;
