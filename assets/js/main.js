@@ -27,7 +27,7 @@ inputField.addEventListener('keypress',(e)=>{
 function createElementTask(idTask,task){
 
     /*====================== CREAT ELEMENT FOR TASK========================= */
-    let liTask = document.createElement('li');
+    const liTask = document.createElement('li');
     liTask.className = "task__content";
     liTask.setAttribute("id", "taskContent");
     listTasks.appendChild(liTask);
@@ -36,13 +36,13 @@ function createElementTask(idTask,task){
                       <div class="action__task">
                           <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked"></i>
                           <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck"></i>
-                          <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onClick="deleteTask(idTask)"></i>
+                          <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onclick="deleteTask(${idTask})"></i>
                       </div>`
     liTask.innerHTML = todoItem;
 
     /*====================== CHECKBOX ACTION ========================= */
-    const iconCheckbox = liTask.querySelector('i#iNoCheck');
-    const taskName = liTask.querySelector('p#nameTask');
+    let iconCheckbox = liTask.querySelector('i#iNoCheck');
+    let taskName = liTask.querySelector('p#nameTask');
 
     iconCheckbox.addEventListener('click',() => {
         if (iconCheckbox.id == "iNoCheck"){
@@ -80,23 +80,37 @@ function createElementTask(idTask,task){
             iconCheckbox.setAttribute("id", "iNoCheck");
         }
     })
+    
+}
+
+function reloadAfterDelete(todoData){
+
+    const listElement = listTasks.querySelectorAll('li#taskContent');
+    for(let i=0; i<listElement.length ;i++){
+        listElement[i].parentNode.removeChild(listElement[i]);
+        // console.log(listElement[i]);
+    }
+
+    todoData.forEach((e)=>{
+        createElementTask(e.idTask, e.nameTaskValue);
+    })
 }
 
 
-
 /*====================== DELETE TASK ========================= */
-// function deleteTask(idTask){
-//     todoData = JSON.parse(localStorage.getItem('taskList'));
+function deleteTask(idTask){
+    // const li = document.getElementById('taskContent');
+    todoData = JSON.parse(localStorage.getItem('taskList'));
 
-//     todoData.forEach((element)=>{
-//         if(idTask == element.idTask){
-//             listTasks.removeChild(liTask);
-//         }
-//     })
+    for(var i=0; i < todoData.length; i++){
+        if (todoData[i].idTask == idTask){
+            todoData.splice(i, 1);
+            localStorage.setItem('taskList', JSON.stringify(todoData));
+        }
+    }
 
-//     localStorage.setItem('taskList', JSON.stringify(todoData));
-// }
-
+    reloadAfterDelete(todoData);
+}
 
 
 //Funtion to check Arr
@@ -134,7 +148,14 @@ function checkID(todo,idMax){
     }
 }
 
-
+/*========== RENDER TASKS FROM LISH TASK SAVED INTO ARRAY INSIDE localStorage ========================= */
+function loadTask(){
+    const todo = JSON.parse(localStorage.getItem('taskList')) || [];
+    
+    todo.forEach((element)=>{
+        createElementTask(element.id,element.nameTaskValue);
+    });
+}
 
 /*============= SAVE TASK INTO OBJECT & PUSH THE ARRAY INSIDE localStorage =================== */
 function saveTask(){
@@ -145,6 +166,7 @@ function saveTask(){
 
     //Call funtion to check Array
     tasks = checkArr(tasksCheck);
+    console.log(typeof tasks);
 
     //Call funtion to find id largest and 
     idTask = checkID(tasks, idCheck);
@@ -160,8 +182,6 @@ function saveTask(){
         localStorage.setItem('taskList', JSON.stringify(tasks));
 
         createElementTask(idTask,task);
-
-        console.log(tasks);
     }
     else{
         alert("Plesea write a task you want to do.");
@@ -171,14 +191,7 @@ function saveTask(){
 }
 
 
-/*========== RENDER TASKS FROM LISH TASK SAVED INTO ARRAY INSIDE localStorage ========================= */
-function loadTask(){
-    const todo = JSON.parse(localStorage.getItem('taskList')) || [];
-    
-    todo.forEach((item)=>{
-        createElementTask(item.idTask,item.nameTaskValue);
-    });
-}
+
 
 
 
