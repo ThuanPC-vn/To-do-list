@@ -8,22 +8,6 @@ let inputField = document.getElementById('input-field');
 loadTask();
 
 
-/*============== FUNTION addTask WITH CONDITIONAL ================= */
-// function addTask(){
-
-//     const task = inputField.value.trim();
-//     if (task){
-//         createElementTask(task);
-//         inputField.value = '';
-//         saveTask();
-//     }
-//     else{
-//         alert("Plesea write a task you want to do.");
-//     }
-
-    
-// }
-
 /*============== WHEN CLICK ADD ITEM IS CALL FUNTION addTask ================= */
 addTodo.addEventListener('click',saveTask);
 
@@ -40,10 +24,10 @@ inputField.addEventListener('keypress',(e)=>{
 });
 
 /*============== FUNTION CREAT ELEMENT & LOGIC ACTION BUTTON ================= */
-function createElementTask(task){
+function createElementTask(idTask,task){
 
     /*====================== CREAT ELEMENT FOR TASK========================= */
-    const liTask = document.createElement('li');
+    let liTask = document.createElement('li');
     liTask.className = "task__content";
     liTask.setAttribute("id", "taskContent");
     listTasks.appendChild(liTask);
@@ -52,7 +36,7 @@ function createElementTask(task){
                       <div class="action__task">
                           <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked"></i>
                           <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck"></i>
-                          <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onClick="deleteTask(element.id)"></i>
+                          <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onClick="deleteTask(idTask)"></i>
                       </div>`
     liTask.innerHTML = todoItem;
 
@@ -96,15 +80,59 @@ function createElementTask(task){
             iconCheckbox.setAttribute("id", "iNoCheck");
         }
     })
-
 }
 
+
+
 /*====================== DELETE TASK ========================= */
+// function deleteTask(idTask){
+//     todoData = JSON.parse(localStorage.getItem('taskList'));
+
+//     todoData.forEach((element)=>{
+//         if(idTask == element.idTask){
+//             listTasks.removeChild(liTask);
+//         }
+//     })
+
+//     localStorage.setItem('taskList', JSON.stringify(todoData));
+// }
 
 
 
+//Funtion to check Arr
+function checkArr(tasksCheck){
 
+    tasksCheck = JSON.parse(localStorage.getItem('taskList'));
 
+    if(!tasksCheck){
+        tasksCheck = [];
+        return tasksCheck;
+    }
+    else{
+        return tasksCheck;
+    }
+}
+
+//Funtion to find id largest
+function checkID(todo,idMax){
+    todo = JSON.parse(localStorage.getItem('taskList'));
+    if(!todo){
+        idTask=0;
+        return idTask;
+    }
+    else{
+        let maxID = 0
+        todo.forEach((item)=>{
+            console.log(item.idTask);
+            if(item.idTask > maxID){
+                maxID = item.idTask; 
+            }
+        })
+        console.log(maxID);
+        idMax = maxID;
+        return idMax+1;
+    }
+}
 
 
 
@@ -112,43 +140,14 @@ function createElementTask(task){
 function saveTask(){
 
     const task = inputField.value.trim();
-    let tasks = [];
-    let idTask, IDmax;
-    
-    //Funtion to find id largest
-    function checkArr(tasks){
+    let tasks, tasksCheck;
+    let idTask, idCheck;
 
-        tasks = JSON.parse(localStorage.getItem('taskList'));
+    //Call funtion to check Array
+    tasks = checkArr(tasksCheck);
 
-        if(!tasks){
-            tasks = [];
-        }
-    }
-
-    //Funtion to find id largest
-    function checkID(todo,idTask){
-
-        todo = JSON.parse(localStorage.getItem('taskList'));
-
-        if(!todo){
-            idTask=0;
-            return idTask;
-        }
-        else{
-            let maxID = 0
-            todo.forEach((item)=>{
-                console.log(item.idTask);
-                if(item.idTask > maxID){
-                    maxID = item.idTask; 
-                }
-            })
-            console.log(maxID);
-            idTask = maxID;
-            return idTask+1;
-        }
-    }
-
-    
+    //Call funtion to find id largest and 
+    idTask = checkID(tasks, idCheck);
 
     if (task){
         // funtion add value in a Object
@@ -157,27 +156,18 @@ function saveTask(){
             this.nameTaskValue = nameTaskValue
         }
 
-        checkArr(tasks);
-        idTask = checkID(tasks, IDmax);
-
-        // listTasks.querySelectorAll('li').forEach((item)=>{
-        //     tasks.push(new objectTask(idTask, item.textContent));
-        // })
         tasks.push(new ObjTask(idTask, task));
         localStorage.setItem('taskList', JSON.stringify(tasks));
 
-        let todoRender = JSON.parse(localStorage.getItem('taskList')) || [];
-        todoRender.forEach((element)=>{
-            createElementTask(element.nameTaskValue);
-        })
-        
+        createElementTask(idTask,task);
+
         console.log(tasks);
-        inputField.value = '';
     }
     else{
         alert("Plesea write a task you want to do.");
     }
 
+    inputField.value = '';
 }
 
 
@@ -186,7 +176,7 @@ function loadTask(){
     const todo = JSON.parse(localStorage.getItem('taskList')) || [];
     
     todo.forEach((item)=>{
-        createElementTask(item.nameTaskValue);
+        createElementTask(item.idTask,item.nameTaskValue);
     });
 }
 
