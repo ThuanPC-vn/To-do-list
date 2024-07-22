@@ -3,6 +3,11 @@ let addTodo = document.getElementById('addTaskButton');
 let listTasks = document.getElementById('list-tasks');
 let inputField = document.getElementById('input-field');
 
+let textEmpty = document.getElementById('text-Empty');
+let waringAlert = document.getElementById('popu-waring');
+let closeWaring = document.getElementById('close-waring');
+let todoCard = document.getElementById('todo-card');
+
 
 //*============== CALL FUNTION RENDER DATA TASK FROM LOCALSTORAGE ================= */
 loadTask();
@@ -18,10 +23,21 @@ inputField.addEventListener('keypress',(e)=>{
     }
     else{
         if (!inputField.value && e.key == 'Enter'){
-            alert("Plesea write a task you want to do.");
+            waringEmptyTask();
         }
     }
 });
+
+/*============== FUNTION WARING IF USER ENTER INPUT TASK IS EMPTY ================= */
+function waringEmptyTask(){
+    waringAlert.style.display = "flex";
+    todoCard.style.filter = "blur(30px)";
+
+    closeWaring.addEventListener('click',()=>{
+        waringAlert.style.display = "none";
+        todoCard.style.filter = "blur(0px)";
+    })
+}
 
 /*============== FUNTION CREAT ELEMENT ================= */
 function createElementTask(idTask,task,activeCheckBox){
@@ -106,6 +122,14 @@ function deleteTask(idTask){
         }
     }
 
+    // if arr tasks = empty, print waring that list is empty right now
+    if (todoData.length == 0 || todoData == []){
+        textEmpty.style.display = "block";
+    }
+    else{
+        textEmpty.style.display = "none";
+    }
+
 }
 
 
@@ -169,10 +193,18 @@ function saveTask(){
         tasks.push(new ObjTask(idTask, task, activeCheckBox));
         localStorage.setItem('taskList', JSON.stringify(tasks));
 
+        // if arr tasks = empty, print waring that list is empty right now
+        if (tasks.length == 0 || tasks == []){
+            textEmpty.style.display = "block";
+        }
+        else{
+            textEmpty.style.display = "none";
+        }
+
         createElementTask(idTask,task, activeCheckBox);
     }
     else{
-        alert("Plesea write a task you want to do.");
+        waringEmptyTask();
     }
 
     inputField.value = '';
@@ -181,8 +213,15 @@ function saveTask(){
 
 /*========== RENDER TASKS FROM LISH TASK SAVED INTO ARRAY INSIDE localStorage ========================= */
 function loadTask(){
-    const todo = JSON.parse(localStorage.getItem('taskList')) || [];
-    
+    const todo = JSON.parse(localStorage.getItem('taskList'));
+
+    if (todo.length == 0 || todo == []){
+        textEmpty.style.display = "block";
+    }
+    else{
+        textEmpty.style.display = "none";
+    }
+
     todo.forEach((element)=>{
         /*====================== CREAT ELEMENT FOR TASK========================= */
         const liTask = document.createElement('li');
