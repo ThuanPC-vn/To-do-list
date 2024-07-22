@@ -37,16 +37,14 @@
                     <ul class="list__task" id="list-tasks">
 
                         <!-- <li class="task__content" id="taskContent">
-                            <p class="name__task" id="nameTask">Learn VueJS</p>
+                            <p class="name__task" id="nameTask">${task}</p>
                             <div class="action__task">
-                                <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked"></i>
-                                <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck"></i>
-                                <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onclick="deleteTask(idTask)"></i>
+                                <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked" onclick="checkTask(${idTask},${activeCheckBox})"></i>
+                                <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck" onclick="checkTask(${idTask},${activeCheckBox})"></i>
+                                <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onclick="deleteTask(${idTask})"></i>
                             </div>
                         </li> -->
 
-                        
-                        
                     </ul>
                 </div>
 

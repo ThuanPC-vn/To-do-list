@@ -8,10 +8,10 @@ let inputField = document.getElementById('input-field');
 loadTask();
 
 
-/*============== WHEN CLICK ADD ITEM IS CALL FUNTION addTask ================= */
+/*============== WHEN CLICK ADD ITEM IS CALL FUNTION saveTask ================= */
 addTodo.addEventListener('click',saveTask);
 
-/*============== WHEN PRESS 'Enter' IS CALL FUNTION addTask ================= */
+/*============== WHEN PRESS 'Enter' IS CALL FUNTION saveTask ================= */
 inputField.addEventListener('keypress',(e)=>{
     if (inputField.value && e.key === 'Enter'){
         saveTask();
@@ -23,8 +23,8 @@ inputField.addEventListener('keypress',(e)=>{
     }
 });
 
-/*============== FUNTION CREAT ELEMENT & LOGIC ACTION BUTTON ================= */
-function createElementTask(idTask,task){
+/*============== FUNTION CREAT ELEMENT ================= */
+function createElementTask(idTask,task,activeCheckBox){
 
     /*====================== CREAT ELEMENT FOR TASK========================= */
     const liTask = document.createElement('li');
@@ -34,55 +34,62 @@ function createElementTask(idTask,task){
 
     const todoItem = `<p class="name__task" id="nameTask">${task}</p>
                       <div class="action__task">
-                          <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked"></i>
-                          <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck"></i>
+                          <i class='bx bx-checkbox-square bx-md bx__noCheck' id="checkBox" onclick="checkTask(${idTask},${activeCheckBox})"></i>
                           <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onclick="deleteTask(${idTask})"></i>
                       </div>`
     liTask.innerHTML = todoItem;
-
-    /*====================== CHECKBOX ACTION ========================= */
-    let iconCheckbox = liTask.querySelector('i#iNoCheck');
-    let taskName = liTask.querySelector('p#nameTask');
-
-    iconCheckbox.addEventListener('click',() => {
-        if (iconCheckbox.id == "iNoCheck"){
-            taskName.style.textDecoration = "line-through";
-            taskName.style.filter = "opacity(50%)";
-
-            iconCheckbox.classList.remove(
-                'bx',
-                'bx-checkbox-square',
-                'bx-md',
-                'bx__noCheck');
-
-            iconCheckbox.classList.add('bx',
-                'bxs-check-square',
-                'bx-sm', 
-                'bx__Checked');
-
-            iconCheckbox.setAttribute("id","Checked");
-        }
-        else{
-            taskName.style.textDecoration = "none";
-            taskName.style.filter = "opacity(100%)";
-
-            iconCheckbox.classList.remove(
-                'bx', 
-                'bxs-check-square', 
-                'bx-sm', 
-                'bx__Checked');
-
-            iconCheckbox.classList.add('bx', 
-                'bx-checkbox-square', 
-                'bx-md', 
-                'bx__noCheck');
-
-            iconCheckbox.setAttribute("id", "iNoCheck");
-        }
-    })
-    
 }
 
+/*====================== FUNTION CHECKBOX TO COMPELETE TASK ========================= */
+function checkTask(idTask,activeCheckBox){
+
+    todoCheckBox = JSON.parse(localStorage.getItem('taskList'));
+    const taskName = listTasks.querySelectorAll('p#nameTask');
+    const iCheckBox = listTasks.querySelectorAll('i#checkBox');
+    
+
+    for(let i=0; i < todoCheckBox.length; i++){
+        if (todoCheckBox[i].idTask == idTask){
+            if (todoCheckBox[i].checkBoxStatus == false){
+                taskName[i].style.textDecoration = "line-through";
+                taskName[i].style.filter = "opacity(50%)";
+
+                iCheckBox[i].classList.remove(
+                    'bx',
+                    'bx-checkbox-square',
+                    'bx-md',
+                    'bx__noCheck');
+                iCheckBox[i].classList.add('bx',
+                    'bxs-check-square',
+                    'bx-sm', 
+                    'bx__Checked');
+
+                todoCheckBox[i].checkBoxStatus = true;
+                activeCheckBox = true;
+                localStorage.setItem('taskList', JSON.stringify(todoCheckBox));
+            }
+            else{
+                taskName[i].style.textDecoration = "none";
+                taskName[i].style.filter = "opacity(100%)";
+
+                
+                iCheckBox[i].classList.remove('bx',
+                    'bxs-check-square',
+                    'bx-sm', 
+                    'bx__Checked');
+                iCheckBox[i].classList.add(
+                    'bx',
+                    'bx-checkbox-square',
+                    'bx-md',
+                    'bx__noCheck');
+
+                todoCheckBox[i].checkBoxStatus = false;
+                activeCheckBox = false;
+                localStorage.setItem('taskList', JSON.stringify(todoCheckBox));
+            }
+        }
+    }
+}
 
 /*====================== DELETE TASK ========================= */
 function deleteTask(idTask){
@@ -143,24 +150,26 @@ function saveTask(){
     const task = inputField.value.trim();
     let tasks, tasksCheck;
     let idTask, idCheck;
+    let activeCheckBox = false;
 
     //Call funtion to check Array
     tasks = checkArr(tasksCheck);
 
-    //Call funtion to find id largest and 
+    //Call funtion to find id largest
     idTask = checkID(tasks, idCheck);
 
     if (task){
         // funtion add value in a Object
-        function ObjTask(idTask, nameTaskValue){
+        function ObjTask(idTask, nameTaskValue,checkBoxStatus){
             this.idTask = idTask,
-            this.nameTaskValue = nameTaskValue
+            this.nameTaskValue = nameTaskValue,
+            this.checkBoxStatus = checkBoxStatus
         }
 
-        tasks.push(new ObjTask(idTask, task));
+        tasks.push(new ObjTask(idTask, task, activeCheckBox));
         localStorage.setItem('taskList', JSON.stringify(tasks));
 
-        createElementTask(idTask,task);
+        createElementTask(idTask,task, activeCheckBox);
     }
     else{
         alert("Plesea write a task you want to do.");
@@ -183,54 +192,42 @@ function loadTask(){
 
         const todoItem = `<p class="name__task" id="nameTask">${element.nameTaskValue}</p>
                           <div class="action__task">
-                              <i class='bx bxs-check-square bx-sm bx__Checked' style="display: none" id="iChecked"></i>
-                              <i class='bx bx-checkbox-square bx-md bx__noCheck' id="iNoCheck"></i>
+                              <i class='bx bx-checkbox-square bx-md bx__noCheck' id="checkBox" onclick="checkTask(${element.idTask},${element.checkBoxStatus})"></i>
                               <i class='bx bxs-trash bx-sm bx__trash' id="deleTask" onclick="deleteTask(${element.idTask})"></i>
                           </div>`
         liTask.innerHTML = todoItem;
 
-            /*====================== CHECKBOX ACTION ========================= */
-        let iconCheckbox = liTask.querySelector('i#iNoCheck');
-        let taskName = liTask.querySelector('p#nameTask');
+        const taskName = liTask.querySelector('p#nameTask');
+        const iCheckBox = liTask.querySelector('i#checkBox');
 
-        iconCheckbox.addEventListener('click',() => {
-            if (iconCheckbox.id == "iNoCheck"){
-                taskName.style.textDecoration = "line-through";
-                taskName.style.filter = "opacity(50%)";
+        if(element.checkBoxStatus == true){
+            taskName.style.textDecoration = "line-through";
+            taskName.style.filter = "opacity(50%)";
 
-                iconCheckbox.classList.remove(
-                    'bx',
-                    'bx-checkbox-square',
-                    'bx-md',
-                    'bx__noCheck');
+            iCheckBox.classList.remove(
+                'bx',
+                'bx-checkbox-square',
+                'bx-md',
+                'bx__noCheck');
+            iCheckBox.classList.add('bx',
+                'bxs-check-square',
+                'bx-sm', 
+                'bx__Checked');
+        }
+        else{
+            taskName.style.textDecoration = "none";
+            taskName.style.filter = "opacity(100%)";
 
-                iconCheckbox.classList.add('bx',
-                    'bxs-check-square',
-                    'bx-sm', 
-                    'bx__Checked');
-
-                iconCheckbox.setAttribute("id","Checked");
-            }
-            else{
-                taskName.style.textDecoration = "none";
-                taskName.style.filter = "opacity(100%)";
-
-                iconCheckbox.classList.remove(
-                    'bx', 
-                    'bxs-check-square', 
-                    'bx-sm', 
-                    'bx__Checked');
-
-                iconCheckbox.classList.add('bx', 
-                    'bx-checkbox-square', 
-                    'bx-md', 
-                    'bx__noCheck');
-
-                iconCheckbox.setAttribute("id", "iNoCheck");
-            }
-        })
-    });
+                
+            iCheckBox.classList.remove('bx',
+                'bxs-check-square',
+                'bx-sm', 
+                'bx__Checked');
+            iCheckBox.classList.add(
+                'bx',
+                'bx-checkbox-square',
+                'bx-md',
+                'bx__noCheck');
+        }
+    }) 
 }
-
-
-
