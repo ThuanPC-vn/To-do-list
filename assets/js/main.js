@@ -213,16 +213,16 @@ function saveTask(){
 
 /*========== RENDER TASKS FROM LISH TASK SAVED INTO ARRAY INSIDE localStorage ========================= */
 function loadTask(){
-    const todo = JSON.parse(localStorage.getItem('taskList'));
+    const todoLoad = JSON.parse(localStorage.getItem('taskList')) || [];
 
-    if (todo.length == 0 || todo == []){
+    if (todoLoad.length == 0 || todoLoad == undefined){
         textEmpty.style.display = "block";
     }
     else{
         textEmpty.style.display = "none";
     }
 
-    todo.forEach((element)=>{
+    todoLoad.forEach((element)=>{
         /*====================== CREAT ELEMENT FOR TASK========================= */
         const liTask = document.createElement('li');
         liTask.className = "task__content";
